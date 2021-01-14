@@ -69,6 +69,27 @@ const sampleStatusResponse = `
                 "scarce": 29
             },
             "requestMsec": 12
+        },
+		"NO~^(new|oms)?(.{4})(.{2})(.+)\.(p|m)\\.(make|pre|oper)\\.\\w*-*dcloud\\.(shop\\d+|pool\\d+)\\.(\\w+)\\.yun300\\.cn": {
+            "requestCounter": 505,
+            "inBytes": 171388,
+            "outBytes": 1273382,
+            "responses": {
+                "1xx": 101,
+                "2xx": 201,
+                "3xx": 301,
+                "4xx": 401,
+                "5xx": 501,
+                "miss": 22,
+                "bypass": 23,
+                "expired": 24,
+                "stale": 25,
+                "updating": 26,
+                "revalidated": 27,
+                "hit": 28,
+                "scarce": 29
+            },
+            "requestMsec": 12
         }
     },
 	"filterZones": {

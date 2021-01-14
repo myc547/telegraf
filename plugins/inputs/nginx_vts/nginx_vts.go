@@ -2,6 +2,7 @@ package nginx_vts
 
 import (
 	"bufio"
+	"bytes"
 	"encoding/json"
 	"fmt"
 	"net"
@@ -113,7 +114,16 @@ func (n *NginxVTS) gatherURL(addr *url.URL, acc telegraf.Accumulator) error {
 	contentType := strings.Split(resp.Header.Get("Content-Type"), ";")[0]
 	switch contentType {
 	case "application/json":
-		return gatherStatusURL(bufio.NewReader(resp.Body), getTags(addr), acc)
+		buf := new(bytes.Buffer)
+		buf.ReadFrom(resp.Body)
+		sourceBytes := buf.Bytes()
+		flag := bytes.ContainsAny(buf.Bytes(), "\\")
+		if flag {
+			old := [] byte("\\")
+			news := [] byte("\\\\")
+			sourceBytes = bytes.ReplaceAll(sourceBytes, old, news)
+		}
+		return gatherStatusURL(bufio.NewReader(bytes.NewReader(sourceBytes)), getTags(addr), acc)
 	default:
 		return fmt.Errorf("%s returned unexpected content type %s", addr.String(), contentType)
 	}
