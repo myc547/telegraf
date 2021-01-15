@@ -70,27 +70,40 @@ const sampleStatusResponse = `
             },
             "requestMsec": 12
         },
-		"NO~^(new|oms)?(.{4})(.{2})(.+)\.(p|m)\\.(make|pre|oper)\\.\\w*-*dcloud\\.(shop\\d+|pool\\d+)\\.(\\w+)\\.yun300\\.cn": {
-            "requestCounter": 505,
-            "inBytes": 171388,
-            "outBytes": 1273382,
-            "responses": {
-                "1xx": 101,
-                "2xx": 201,
-                "3xx": 301,
-                "4xx": 401,
-                "5xx": 501,
-                "miss": 22,
-                "bypass": 23,
-                "expired": 24,
-                "stale": 25,
-                "updating": 26,
-                "revalidated": 27,
-                "hit": 28,
-                "scarce": 29
-            },
-            "requestMsec": 12
-        }
+		"NO~^(new|oms)?(.{4})(.{2})(.+)\.(p|m)\.(make|pre|oper)\.\w*-*dcloud\.(shop\d+|pool\d+)\.(\w+)\.yun300\.cn": {
+			"requestCounter": 3,
+			"inBytes": 2979,
+			"outBytes": 16013,
+			"responses": {
+				"1xx": 0,
+				"2xx": 3,
+				"3xx": 0,
+				"4xx": 0,
+				"5xx": 0
+			},
+			"requestMsecCounter": 780,
+			"requestMsec": 0,
+			"requestMsecs": {
+				"times": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1610614467433, 1610614468472, 1610614469008],
+				"msecs": [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 405, 0, 375]
+			},
+			"requestBuckets": {
+				"msecs": [],
+				"counters": []
+			},
+			"overCounts": {
+				"maxIntegerSize": 18446744073709551615,
+				"requestCounter": 0,
+				"inBytes": 0,
+				"outBytes": 0,
+				"1xx": 0,
+				"2xx": 0,
+				"3xx": 0,
+				"4xx": 0,
+				"5xx": 0,
+				"requestMsecCounter": 0
+			}
+		}
     },
 	"filterZones": {
 		"country": {

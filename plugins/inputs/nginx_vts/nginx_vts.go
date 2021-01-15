@@ -114,6 +114,7 @@ func (n *NginxVTS) gatherURL(addr *url.URL, acc telegraf.Accumulator) error {
 	contentType := strings.Split(resp.Header.Get("Content-Type"), ";")[0]
 	switch contentType {
 	case "application/json":
+		fmt.Println("start nginx_vts json")
 		buf := new(bytes.Buffer)
 		buf.ReadFrom(resp.Body)
 		sourceBytes := buf.Bytes()
@@ -122,6 +123,7 @@ func (n *NginxVTS) gatherURL(addr *url.URL, acc telegraf.Accumulator) error {
 			old := [] byte("\\")
 			news := [] byte("\\\\")
 			sourceBytes = bytes.ReplaceAll(sourceBytes, old, news)
+			fmt.Println("modify json is:", sourceBytes)
 		}
 		return gatherStatusURL(bufio.NewReader(bytes.NewReader(sourceBytes)), getTags(addr), acc)
 	default:
