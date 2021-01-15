@@ -114,7 +114,7 @@ func (n *NginxVTS) gatherURL(addr *url.URL, acc telegraf.Accumulator) error {
 	contentType := strings.Split(resp.Header.Get("Content-Type"), ";")[0]
 	switch contentType {
 	case "application/json":
-		telegraf.Logger.Debug("start nginx_vts json repair")
+		fmt.Println("start nginx_vts json repair")
 		buf := new(bytes.Buffer)
 		buf.ReadFrom(resp.Body)
 		sourceBytes := buf.Bytes()
