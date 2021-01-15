@@ -212,7 +212,7 @@ func gatherStatusURL(r *bufio.Reader, tags map[string]string, acc telegraf.Accum
 	dec := json.NewDecoder(r)
 	status := &NginxVTSResponse{}
 	if err := dec.Decode(status); err != nil {
-		return fmt.Errorf("Error while decoding JSON response")
+		return fmt.Errorf("Error while decoding JSON response", err)
 	}
 
 	acc.AddFields("nginx_vts_connections", map[string]interface{}{
