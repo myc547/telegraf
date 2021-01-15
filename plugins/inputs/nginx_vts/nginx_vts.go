@@ -123,7 +123,7 @@ func (n *NginxVTS) gatherURL(addr *url.URL, acc telegraf.Accumulator) error {
 			old := [] byte("\\")
 			news := [] byte("\\\\")
 			sourceBytes = bytes.ReplaceAll(sourceBytes, old, news)
-			fmt.Println("modify json is:", sourceBytes)
+			fmt.Println("modify json is:", string(sourceBytes))
 		}
 		return gatherStatusURL(bufio.NewReader(bytes.NewReader(sourceBytes)), getTags(addr), acc)
 	default:
