@@ -114,7 +114,7 @@ func (n *NginxVTS) gatherURL(addr *url.URL, acc telegraf.Accumulator) error {
 	contentType := strings.Split(resp.Header.Get("Content-Type"), ";")[0]
 	switch contentType {
 	case "application/json":
-		fmt.Println("start nginx_vts json")
+		fmt.Println("start nginx_vts json repair")
 		buf := new(bytes.Buffer)
 		buf.ReadFrom(resp.Body)
 		sourceBytes := buf.Bytes()
@@ -123,8 +123,11 @@ func (n *NginxVTS) gatherURL(addr *url.URL, acc telegraf.Accumulator) error {
 			old := [] byte("\\")
 			news := [] byte("\\\\")
 			sourceBytes = bytes.ReplaceAll(sourceBytes, old, news)
+
+			//字符\x1f是ASCII和UTF-8中的单位分隔符。它绝不是UTF-8编码的一部分，但可用于标记不同的文本位。
+			//据我所知，带有\x1f的字符串可以是有效的UTF-8但不是有效的json
+			//so,try remove \x1f
 			sourceBytes = bytes.ReplaceAll(sourceBytes, []byte{0x1f}, []byte{' '})
-			fmt.Println("modify json is:", string(sourceBytes))
 		}
 		return gatherStatusURL(bufio.NewReader(bytes.NewReader(sourceBytes)), getTags(addr), acc)
 	default:
