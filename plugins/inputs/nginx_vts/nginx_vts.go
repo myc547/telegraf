@@ -123,6 +123,7 @@ func (n *NginxVTS) gatherURL(addr *url.URL, acc telegraf.Accumulator) error {
 			old := [] byte("\\")
 			news := [] byte("\\\\")
 			sourceBytes = bytes.ReplaceAll(sourceBytes, old, news)
+			sourceBytes = bytes.ReplaceAll(sourceBytes, []byte{0x1f}, []byte{' '})
 			fmt.Println("modify json is:", string(sourceBytes))
 		}
 		return gatherStatusURL(bufio.NewReader(bytes.NewReader(sourceBytes)), getTags(addr), acc)
@@ -211,7 +212,7 @@ func gatherStatusURL(r *bufio.Reader, tags map[string]string, acc telegraf.Accum
 	dec := json.NewDecoder(r)
 	status := &NginxVTSResponse{}
 	if err := dec.Decode(status); err != nil {
-		return fmt.Errorf("Error while decoding JSON response", err)
+		return fmt.Errorf("Error while decoding JSON response")
 	}
 
 	acc.AddFields("nginx_vts_connections", map[string]interface{}{
